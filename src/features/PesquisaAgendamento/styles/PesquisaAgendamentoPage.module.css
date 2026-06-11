@@ -1,0 +1,342 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(50, 110, 255, 0.16), transparent 26%),
+    radial-gradient(circle at 88% 12%, rgba(66, 221, 255, 0.12), transparent 22%),
+    linear-gradient(180deg, #020611 0%, #071021 42%, #09172c 100%);
+  color: #f8fbff;
+}
+
+.hero {
+  padding: 72px 24px 24px;
+}
+
+.heroContent,
+.content {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  margin-bottom: 18px;
+  border: 1px solid rgba(143, 196, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(7, 17, 36, 0.72);
+  color: #8fc4ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.backButton:hover {
+  transform: translateY(-1px);
+  border-color: rgba(143, 196, 255, 0.32);
+  background: rgba(10, 22, 46, 0.86);
+}
+
+.title {
+  margin: 0 0 12px;
+  max-width: 720px;
+  color: #f7fbff;
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
+  line-height: 1.05;
+}
+
+.description {
+  margin: 0;
+  max-width: 640px;
+  font-size: 1rem;
+  color: rgba(223, 233, 250, 0.82);
+  line-height: 1.75;
+}
+
+.searchPanel {
+  margin-top: 32px;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  background: rgba(6, 14, 28, 0.82);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 28px 80px rgba(3, 11, 24, 0.26);
+}
+
+.searchLabel {
+  display: inline-flex;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #d8e7ff;
+}
+
+.searchForm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+}
+
+.searchInput {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 1px solid rgba(143, 196, 255, 0.22);
+  border-radius: 16px;
+  background: rgba(7, 17, 36, 0.88);
+  color: #f8fbff;
+}
+
+.searchInput::placeholder {
+  color: rgba(216, 231, 255, 0.52);
+}
+
+.searchInput:focus {
+  outline: 2px solid rgba(143, 196, 255, 0.82);
+  outline-offset: 2px;
+}
+
+.searchButton {
+  min-width: 144px;
+  min-height: 52px;
+  padding: 0 20px;
+  border: 1px solid rgba(110, 168, 255, 0.26);
+  border-radius: 999px;
+  background: rgba(12, 27, 58, 0.92);
+  color: #f7fbff;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.searchButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(135, 188, 255, 0.44);
+  background: rgba(15, 33, 70, 0.98);
+}
+
+.searchButton:disabled,
+.cardButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.searchExamples,
+.resultsCount,
+.feedbackText {
+  color: rgba(223, 233, 250, 0.82);
+}
+
+.searchExamples {
+  margin: 12px 0 0;
+  font-size: 0.95rem;
+}
+
+.content {
+  flex: 1;
+  padding: 8px 24px 64px;
+}
+
+.resultsPanel {
+  border: 1px solid rgba(121, 168, 255, 0.12);
+  border-radius: 30px;
+  background: rgba(5, 14, 28, 0.52);
+  padding: 24px;
+}
+
+.resultsCount {
+  margin: 0 0 20px;
+  font-weight: 600;
+  color: #d8e7ff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.cardButton {
+  padding: 0;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.card {
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: 24px;
+  background: #f3f4f7;
+  box-shadow: 0 12px 28px rgba(2, 8, 20, 0.18);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.cardButton:hover .card,
+.cardButton:focus-visible .card {
+  transform: translateY(-4px);
+  border-color: rgba(143, 196, 255, 0.22);
+  box-shadow: 0 20px 38px rgba(2, 8, 20, 0.24);
+}
+
+.cardButton:focus-visible {
+  outline: none;
+}
+
+.cardImage,
+.skeletonImage {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.cardTag,
+.feedbackTitle {
+  font-weight: 700;
+}
+
+.cardTag {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: #c45c0b;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.cardTitle {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  color: #1f2937;
+}
+
+.cardDescription {
+  margin: 0;
+  color: #5b6b84;
+  line-height: 1.6;
+}
+
+.feedbackBox,
+.errorBox {
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid rgba(118, 159, 255, 0.16);
+  background: rgba(6, 15, 35, 0.9);
+  box-shadow: 0 18px 40px rgba(3, 11, 24, 0.2);
+}
+
+.errorBox {
+  border-color: rgba(255, 92, 136, 0.24);
+}
+
+.feedbackTitle {
+  margin: 0 0 8px;
+  color: #f8fbff;
+  font-size: 1.1rem;
+}
+
+.feedbackText {
+  margin: 0;
+}
+
+.skeletonImage,
+.skeletonTag,
+.skeletonTitle,
+.skeletonText {
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0.95) 25%,
+    rgba(241, 245, 249, 1) 50%,
+    rgba(226, 232, 240, 0.95) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.4s ease-in-out infinite;
+}
+
+.skeletonTag {
+  width: 38%;
+  height: 14px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.skeletonTitle {
+  width: 78%;
+  height: 22px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.skeletonText {
+  width: 100%;
+  height: 16px;
+  border-radius: 8px;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 48px;
+  }
+
+  .searchForm {
+    grid-template-columns: 1fr;
+  }
+
+  .searchButton {
+    width: 100%;
+  }
+
+  .content {
+    padding-bottom: 40px;
+  }
+
+  .resultsPanel {
+    padding: 18px;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

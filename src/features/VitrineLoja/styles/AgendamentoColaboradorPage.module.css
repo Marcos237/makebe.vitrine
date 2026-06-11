@@ -1,0 +1,372 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(48, 110, 255, 0.18), transparent 24%),
+    linear-gradient(180deg, #020611 0%, #07111f 38%, #030814 100%);
+}
+
+.section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 24px 56px;
+}
+
+.feedbackBox {
+  display: grid;
+  gap: 12px;
+  padding: 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(120, 168, 255, 0.14);
+  background: rgba(7, 15, 30, 0.88);
+}
+
+.feedbackTitle {
+  margin: 0;
+  color: #f8fbff;
+  font-size: 1.25rem;
+}
+
+.feedbackText,
+.backLink {
+  margin: 0;
+  color: rgba(219, 229, 245, 0.8);
+}
+
+.backLink {
+  text-decoration: none;
+}
+
+.heroCard {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.imagePanel,
+.heroContent,
+.calendarCard {
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 24px;
+  background: rgba(6, 14, 28, 0.82);
+  backdrop-filter: blur(16px);
+}
+
+.imagePanel {
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.image,
+.imageFallback {
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  display: block;
+  object-fit: cover;
+}
+
+.imageFallback {
+  background: linear-gradient(135deg, rgba(120, 209, 255, 0.22), rgba(60, 96, 255, 0.28));
+}
+
+.heroContent {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  padding: 28px;
+}
+
+.eyebrow,
+.cardLabel {
+  color: #8fc4ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title,
+.calendarTitle {
+  margin: 0;
+  color: #ffffff;
+}
+
+.title {
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.description,
+.selectionText {
+  margin: 0;
+  color: rgba(219, 229, 245, 0.8);
+  line-height: 1.75;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid rgba(143, 196, 255, 0.28);
+  border-radius: 999px;
+  color: #d8e7ff;
+  background: rgba(7, 17, 36, 0.72);
+  text-decoration: none;
+}
+
+.calendarSection {
+  margin-top: 18px;
+}
+
+.calendarCard {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.calendarHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.calendarTitle {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.calendarControls {
+  display: flex;
+  gap: 12px;
+}
+
+.controlButton {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(120, 168, 255, 0.24);
+  border-radius: 50%;
+  background: rgba(7, 17, 36, 0.88);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.weekdays,
+.calendarGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.weekday {
+  color: rgba(219, 229, 245, 0.72);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.dayButton,
+.emptyDay {
+  min-height: 64px;
+  border-radius: 16px;
+}
+
+.dayButton {
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  background: rgba(9, 20, 40, 0.82);
+  color: #f4f8ff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.dayButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  border-color: rgba(120, 209, 255, 0.46);
+}
+
+.dayButton[data-today="true"] {
+  border-color: rgba(92, 224, 201, 0.7);
+  background: rgba(92, 224, 201, 0.2);
+  color: #dffff8;
+}
+
+.dayButton[data-selected="true"] {
+  background: linear-gradient(135deg, #78d1ff, #4078ff);
+  color: #03101f;
+  font-weight: 700;
+}
+
+.dayButton[data-booked="true"] {
+  border-color: rgba(237, 20, 91, 0.72);
+  background: rgba(237, 20, 91, 0.2);
+  color: #ffe4ee;
+}
+
+.dayButton[data-booked="true"][data-selected="true"] {
+  background: #ed145b;
+  color: #ffffff;
+}
+
+.dayButton[data-readonly="true"] {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(84, 95, 120, 0.22);
+  color: rgba(219, 229, 245, 0.38);
+  cursor: not-allowed;
+}
+
+.emptyDay {
+  background: rgba(9, 20, 40, 0.22);
+}
+
+.selectionBox {
+  display: grid;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 20px;
+  background: rgba(9, 20, 40, 0.54);
+}
+
+.selectionStatus {
+  margin: 0;
+  color: rgba(143, 196, 255, 0.78);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.fieldLabel {
+  color: rgba(219, 229, 245, 0.8);
+  font-size: 0.95rem;
+}
+
+.selectField {
+  min-height: 52px;
+  padding: 0 16px;
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(9, 20, 40, 0.82);
+  color: #f4f8ff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.selectField:focus {
+  border-color: rgba(120, 209, 255, 0.46);
+}
+
+.timeSection {
+  display: grid;
+  gap: 20px;
+}
+
+.timeHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.timePaginationStatus {
+  margin: 0;
+  color: rgba(219, 229, 245, 0.72);
+  font-size: 0.92rem;
+}
+
+.timeButton {
+  min-height: 52px;
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(9, 20, 40, 0.82);
+  color: #f4f8ff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.timeButton:disabled {
+  cursor: not-allowed;
+}
+
+.timeButton[data-selected="true"] {
+  background: linear-gradient(135deg, #78d1ff, #4078ff);
+  color: #03101f;
+  font-weight: 700;
+}
+
+.timeButton[data-booked="true"] {
+  border-color: rgba(237, 20, 91, 0.72);
+  background: rgba(237, 20, 91, 0.2);
+  color: #ffe4ee;
+}
+
+.timeButton[data-booked="true"][data-selected="true"] {
+  background: #ed145b;
+  color: #ffffff;
+}
+
+.submitButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: flex-start;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #78d1ff, #4078ff);
+  color: #03101f;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+@media (max-width: 960px) {
+  .heroCard {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .calendarHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timeHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .weekdays,
+  .calendarGrid {
+    gap: 8px;
+  }
+
+  .dayButton,
+  .emptyDay {
+    min-height: 52px;
+  }
+}

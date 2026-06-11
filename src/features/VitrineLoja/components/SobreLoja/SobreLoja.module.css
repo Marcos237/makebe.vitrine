@@ -1,0 +1,96 @@
+.section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.9fr);
+  gap: 28px;
+}
+
+.content {
+  display: grid;
+  gap: 18px;
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid rgba(112, 162, 255, 0.14);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(76, 154, 255, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(8, 17, 36, 0.95), rgba(6, 14, 28, 0.92));
+}
+
+.eyebrow {
+  color: #8fc4ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.08;
+}
+
+.description {
+  margin: 0;
+  color: rgba(219, 229, 245, 0.8);
+  line-height: 1.75;
+}
+
+.richText {
+  color: rgba(219, 229, 245, 0.8);
+  line-height: 1.75;
+}
+
+.richText :global(p) {
+  margin: 0;
+}
+
+.richText :global(p + p) {
+  margin-top: 12px;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.detailCard {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid rgba(124, 166, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(7, 16, 32, 0.78);
+}
+
+.detailLabel {
+  color: #8fc4ff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.detailText {
+  margin: 0;
+  color: rgba(236, 243, 255, 0.84);
+  line-height: 1.6;
+}
+
+@media (max-width: 960px) {
+  .section {
+    grid-template-columns: 1fr;
+    padding-bottom: 56px;
+  }
+}
+
+@media (max-width: 720px) {
+  .details {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,265 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(48, 110, 255, 0.18), transparent 24%),
+    linear-gradient(180deg, #020611 0%, #07111f 38%, #030814 100%);
+}
+
+.section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px 24px 56px;
+}
+
+.heroCard,
+.feedbackBox,
+.card {
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 24px;
+  background: rgba(6, 14, 28, 0.82);
+  backdrop-filter: blur(16px);
+}
+
+.heroCard {
+  margin-bottom: 18px;
+}
+
+.heroContent {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+}
+
+.eyebrow,
+.cardLabel {
+  color: #8fc4ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.title,
+.feedbackTitle,
+.time {
+  margin: 0;
+  color: #ffffff;
+}
+
+.title {
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  line-height: 1.05;
+}
+
+.description,
+.feedbackText,
+.info {
+  margin: 0;
+  color: rgba(219, 229, 245, 0.8);
+  line-height: 1.75;
+}
+
+.actions {
+  display: flex;
+}
+
+.secondaryButton,
+.deleteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.secondaryButton {
+  border: 1px solid rgba(143, 196, 255, 0.28);
+  color: #d8e7ff;
+  background: rgba(7, 17, 36, 0.72);
+}
+
+.feedbackBox {
+  display: grid;
+  gap: 12px;
+  padding: 28px;
+  margin-bottom: 18px;
+}
+
+.listSection {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.card {
+  display: grid;
+  gap: 10px;
+  padding: 24px;
+}
+
+.time {
+  font-size: 1.5rem;
+}
+
+.deleteButton {
+  width: fit-content;
+  margin-top: 8px;
+  border: 1px solid rgba(237, 20, 91, 0.4);
+  background: rgba(237, 20, 91, 0.16);
+  color: #ffe4ee;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  border-color: rgba(237, 20, 91, 0.72);
+  background: rgba(237, 20, 91, 0.24);
+}
+
+.deleteButton:disabled,
+.modalSecondaryButton:disabled,
+.modalPrimaryButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.paginationSection {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 24px;
+  background: rgba(6, 14, 28, 0.82);
+  backdrop-filter: blur(16px);
+}
+
+.paginationText {
+  margin: 0;
+  color: rgba(219, 229, 245, 0.8);
+}
+
+.paginationActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.paginationButton,
+.paginationNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 16px;
+  background: rgba(9, 20, 40, 0.82);
+  color: #f4f8ff;
+  cursor: pointer;
+}
+
+.paginationButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.paginationNumber[data-active="true"] {
+  background: linear-gradient(135deg, #78d1ff, #4078ff);
+  color: #03101f;
+  font-weight: 700;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(2, 6, 17, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+.modalCard {
+  width: min(100%, 420px);
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid rgba(121, 168, 255, 0.16);
+  border-radius: 24px;
+  background: rgba(6, 14, 28, 0.96);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.32);
+}
+
+.modalTitle {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.35rem;
+  line-height: 1.4;
+}
+
+.modalText {
+  margin: 0;
+  color: rgba(219, 229, 245, 0.8);
+  line-height: 1.7;
+}
+
+.modalActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modalSecondaryButton,
+.modalPrimaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modalSecondaryButton {
+  border: 1px solid rgba(143, 196, 255, 0.28);
+  color: #d8e7ff;
+  background: rgba(7, 17, 36, 0.72);
+}
+
+.modalPrimaryButton {
+  border: 1px solid rgba(237, 20, 91, 0.4);
+  color: #ffe4ee;
+  background: rgba(237, 20, 91, 0.16);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 20px 16px 48px;
+  }
+
+  .heroContent,
+  .feedbackBox,
+  .card,
+  .paginationSection,
+  .modalCard {
+    padding: 20px;
+  }
+
+  .actions,
+  .modalActions {
+    display: grid;
+  }
+
+  .secondaryButton,
+  .deleteButton,
+  .modalSecondaryButton,
+  .modalPrimaryButton {
+    width: 100%;
+  }
+}

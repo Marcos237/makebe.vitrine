@@ -1,0 +1,37 @@
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(50, 110, 255, 0.16), transparent 26%),
+    radial-gradient(circle at 88% 12%, rgba(66, 221, 255, 0.12), transparent 22%),
+    linear-gradient(180deg, #020611 0%, #071021 42%, #09172c 100%);
+}
+
+.feedbackSection {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 24px 32px;
+}
+
+.feedbackBox,
+.errorBox {
+  padding: 24px 28px;
+  border: 1px solid rgba(118, 159, 255, 0.16);
+  border-radius: 24px;
+  background: rgba(6, 15, 35, 0.9);
+}
+
+.errorBox {
+  border-color: rgba(255, 92, 136, 0.24);
+}
+
+.feedbackTitle {
+  margin: 0;
+  color: #f8fbff;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.feedbackText {
+  margin: 10px 0 0;
+  color: rgba(223, 233, 250, 0.82);
+}

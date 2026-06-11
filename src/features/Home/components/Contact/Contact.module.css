@@ -1,0 +1,54 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 72px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  margin-bottom: 10px;
+  color: #84b9ff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0 0 12px;
+  color: #f9fbff;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.text,
+.address {
+  margin: 0;
+  color: rgba(223, 233, 250, 0.82);
+}
+
+.card {
+  padding: 28px;
+  border: 1px solid rgba(118, 159, 255, 0.16);
+  border-radius: 28px;
+  background: rgba(6, 15, 35, 0.9);
+}
+
+.line {
+  display: block;
+  color: #ffffff;
+  font-size: 1.05rem;
+}
+
+.line + .line,
+.address {
+  margin-top: 14px;
+}
+
+@media (max-width: 800px) {
+  .section {
+    grid-template-columns: 1fr;
+  }
+}
