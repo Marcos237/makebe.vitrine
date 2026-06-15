@@ -251,8 +251,8 @@
   }
 
   .profileDropdown {
-    left: 0;
-    right: auto;
+    left: auto;
+    right: 8px;
     transform: none;
   }
 
