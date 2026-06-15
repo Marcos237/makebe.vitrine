@@ -184,20 +184,22 @@
   .inner {
     display: grid;
     grid-template-columns: auto 1fr auto;
-    align-items: center;
+    grid-template-rows: auto auto;
+    align-items: start;
     gap: 12px;
+    position: relative;
   }
 
   .nav {
     display: none;
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% - 2px);
     left: 24px;
-    right: 24px;
+    right: auto;
     z-index: 20;
     flex-direction: column;
     align-items: stretch;
-    width: 100%;
+    width: min(260px, calc(100vw - 48px));
     padding: 14px;
     border: 1px solid rgba(120, 164, 255, 0.14);
     border-radius: 20px;
@@ -225,10 +227,20 @@
 
   .menuButton {
     display: inline-flex;
-    justify-self: center;
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    margin-top: 4px;
   }
 
-  .dropdown,
+  .dropdown {
+    top: 0;
+    left: calc(100% - 12px);
+    right: auto;
+    min-width: 180px;
+    transform: none;
+  }
+
   .profileDropdown {
     left: 0;
     right: auto;
@@ -236,8 +248,11 @@
   }
 
   .profile {
+    grid-column: 3;
+    grid-row: 1 / span 2;
     width: auto;
     justify-content: flex-end;
+    align-self: center;
   }
 
   .profileLabel {
@@ -245,6 +260,8 @@
   }
 
   .brand {
+    grid-column: 1;
+    grid-row: 1;
     min-width: 0;
   }
 }
@@ -256,6 +273,13 @@
 
   .nav {
     left: 16px;
-    right: 16px;
+    width: min(248px, calc(100vw - 32px));
+  }
+
+  .dropdown {
+    left: 8px;
+    top: calc(100% - 6px);
+    width: calc(100% - 8px);
+    min-width: 0;
   }
 }
