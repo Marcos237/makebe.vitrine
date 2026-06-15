@@ -80,6 +80,7 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
   const [usuarioSessao, setUsuarioSessao] = useState<SessionUserData | null>(null);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [activeMenuId, setActiveMenuId] = useState<number | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement | null>(null);
   const navRef = useRef<HTMLDivElement | null>(null);
 
@@ -127,6 +128,7 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
 
       if (navRef.current && !navRef.current.contains(target)) {
         setActiveMenuId(null);
+        setMobileMenuOpen(false);
       }
     };
 
@@ -134,6 +136,20 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 820) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -172,7 +188,25 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
           />
         </Link>
 
-        <nav ref={navRef} className={styles.nav} aria-label="Navegacao principal">
+        <button
+          type="button"
+          className={styles.menuButton}
+          aria-label="Abrir menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="main-navigation"
+          onClick={() => setMobileMenuOpen((current) => !current)}
+        >
+          <span className={styles.menuButtonLine} />
+          <span className={styles.menuButtonLine} />
+          <span className={styles.menuButtonLine} />
+        </button>
+
+        <nav
+          id="main-navigation"
+          ref={navRef}
+          className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ""}`}
+          aria-label="Navegacao principal"
+        >
           {renderedNavigationItems.map((item) => (
             <div key={item.id} className={styles.navItem}>
               <a
@@ -191,8 +225,10 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
                     const hash = url.slice(1);
                     scrollToHashTarget(hash);
                     setActiveMenuId(null);
+                    setMobileMenuOpen(false);
                   } else {
                     setActiveMenuId(null);
+                    setMobileMenuOpen(false);
                   }
                 }}
               >
@@ -218,6 +254,7 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
                         }
 
                         setActiveMenuId(null);
+                        setMobileMenuOpen(false);
                       }}
                     >
                       {subItem.subMenuDescricao}
