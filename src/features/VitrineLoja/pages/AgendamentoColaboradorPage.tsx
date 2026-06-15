@@ -656,9 +656,20 @@ export function AgendamentoColaboradorPage() {
     () => (selectedDate ? getAgendasForDate(selectedDate, agendas) : []),
     [agendas, selectedDate],
   );
+  const isSelectedDateEnabled = useMemo(() => {
+    if (!selectedDate) {
+      return false;
+    }
+
+    const isAvailable = isDateAvailable(selectedDate, agendas);
+    const isBlocked = isDateBlocked(selectedDate, agendas);
+    const isOutsideAgendaWeek = isDateOutsideAgendaWeek(selectedDate, agendas);
+
+    return isAvailable && !isBlocked && !isOutsideAgendaWeek;
+  }, [agendas, selectedDate]);
   const timeSlotStates = useMemo(
     () =>
-      selectedDate
+      isSelectedDateEnabled && selectedDate
         ? buildTimeSlotsForDate(
             selectedDate,
             selectedDateAgendas,
@@ -707,6 +718,10 @@ export function AgendamentoColaboradorPage() {
     }
 
     if (selectedDate) {
+      if (!isSelectedDateEnabled) {
+        return [];
+      }
+
       if (hasLoadedAvailablePeriods) {
         return availableTimeSlotStates;
       }
@@ -718,12 +733,13 @@ export function AgendamentoColaboradorPage() {
   }, [
     availableTimeSlotStates,
     hasLoadedAvailablePeriods,
+    isSelectedDateEnabled,
     mockTimeSlots,
     selectedDate,
     selectedService,
     timeSlotStates,
   ]);
-  const canShowTimeSlots = Boolean(selectedService);
+  const canShowTimeSlots = Boolean(selectedService && isSelectedDateEnabled);
   const maxTimeSlotsOffset = Math.max(resolvedTimeSlots.length - TIME_SLOTS_PAGE_SIZE, 0);
   const defaultTimeSlotsOffset = useMemo(() => {
     const defaultIndex = resolvedTimeSlots.findIndex(
@@ -988,7 +1004,7 @@ export function AgendamentoColaboradorPage() {
                           {selectedDate && selectedService
                             ? "Escolha um horario disponivel para continuar o agendamento."
                             : selectedService
-                              ? "Horarios exibidos em modo inicial. Selecione uma data para aplicar as regras da agenda."
+                              ? "Selecione uma data habilitada para exibir os horarios disponiveis."
                               : "Selecione o servico para exibir os horarios disponiveis."}
                         </p>
                       </div>
@@ -1073,7 +1089,7 @@ export function AgendamentoColaboradorPage() {
                         {selectedTime && selectedDate
                           ? `${selectedDate.toLocaleDateString("pt-BR")} as ${selectedTime}`
                           : selectedService
-                            ? "Selecione uma data e clique em um horario para continuar."
+                            ? "Selecione uma data habilitada e clique em um horario para continuar."
                             : "Preencha servico e data para escolher um horario."}
                       </p>
                       {selectedDateHasAgendamento ? (
