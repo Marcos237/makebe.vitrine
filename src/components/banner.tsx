@@ -208,7 +208,14 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
           aria-label="Navegacao principal"
         >
           {renderedNavigationItems.map((item) => (
-            <div key={item.id} className={styles.navItem}>
+            <div
+              key={item.id}
+              className={`${styles.navItem} ${
+                item.rootSubMenus.length > 0 && activeMenuId === item.id
+                  ? styles.navItemActive
+                  : ""
+              }`}
+            >
               <a
                 className={styles.navLink}
                 href={resolveMenuUrl(item)}
