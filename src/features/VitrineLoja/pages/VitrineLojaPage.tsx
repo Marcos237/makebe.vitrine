@@ -11,8 +11,9 @@ export function VitrineLojaPage() {
   const { vitrine = "" } = useParams();
   const { lojas, isLoading, error } = useVitrineLoja();
   const numericVitrineId = Number(vitrine);
+  const isNumericVitrineId = !Number.isNaN(numericVitrineId);
   const selectedLoja = lojas.find((loja) => {
-    if (!Number.isNaN(numericVitrineId) && loja.id === numericVitrineId) {
+    if (isNumericVitrineId && loja.id === numericVitrineId) {
       return true;
     }
 
@@ -26,6 +27,7 @@ export function VitrineLojaPage() {
 
     return razaoSocialSlug === vitrine.toLowerCase();
   });
+  const resolvedLojaId = isNumericVitrineId ? numericVitrineId : selectedLoja?.id;
 
   return (
     <main className={styles.page}>
@@ -51,8 +53,8 @@ export function VitrineLojaPage() {
       {!isLoading && !error ? (
         <>
           <TopCarousel items={lojas} showCaption={false} />
-          <Colaboradores lojaId={selectedLoja?.id} />
-          <SobreLoja vitrine={vitrine} lojaId={selectedLoja?.id} />
+          <Colaboradores lojaId={resolvedLojaId} />
+          <SobreLoja vitrine={vitrine} lojaId={resolvedLojaId} />
         </>
       ) : null}
 
