@@ -24,7 +24,6 @@ export const colaboradorPortifolioImagemService = {
           },
         },
       );
-
       if (Array.isArray(response.data)) {
         return response.data;
       }
