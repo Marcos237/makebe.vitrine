@@ -15,7 +15,7 @@ api.interceptors.request.use((config) => {
   const requestUrl = `${config.baseURL ?? ""}${config.url ?? ""}`;
 
   config.headers = config.headers ?? {};
-  config.headers.ApiKey = resolveApiKey(requestUrl);
+  config.headers.ApiSecurity = resolveApiKey(requestUrl);
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;

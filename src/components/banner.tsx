@@ -92,7 +92,7 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
         const response = await fetch(`${API_BASE_SESSAO_URL}${SESSION_USER_ENDPOINT}`, {
           credentials: "include",
           headers: {
-            ApiKey: resolveApiKey(API_BASE_SESSAO_URL),
+            ApiSecurity: resolveApiKey(API_BASE_SESSAO_URL),
           },
         });
 
