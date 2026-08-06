@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL } from "./apiConfig";
+import { API_BASE_URL, resolveApiKey } from "./apiConfig";
 import { getTokenFromLocalStorage } from "./armazenaToken";
 
 export const api = axios.create({
@@ -12,9 +12,12 @@ export const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = getTokenFromLocalStorage();
+  const requestUrl = `${config.baseURL ?? ""}${config.url ?? ""}`;
+
+  config.headers = config.headers ?? {};
+  config.headers.ApiKey = resolveApiKey(requestUrl);
 
   if (token) {
-    config.headers = config.headers ?? {};
     config.headers.Authorization = `Bearer ${token}`;
   }
 
