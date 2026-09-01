@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_BASE_SESSAO_URL, resolveApiKey } from "../config/apiConfig";
+import { API_BASE_SESSAO_URL, SESSAO_API_KEY } from "../config/apiConfig";
 
 const SESSION_USER_ENDPOINT = "UsuarioSessao";
 
@@ -19,7 +19,7 @@ export function useUsuarioSessao() {
         const response = await fetch(`${API_BASE_SESSAO_URL}${SESSION_USER_ENDPOINT}`, {
           credentials: "include",
           headers: {
-            ApiSecurity: resolveApiKey(API_BASE_SESSAO_URL),
+            ApiSecurity: SESSAO_API_KEY,
           },
         });
 

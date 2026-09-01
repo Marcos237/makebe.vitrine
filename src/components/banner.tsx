@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { API_BASE_SESSAO_URL, URL_IMAGENS, resolveApiKey } from "../config/apiConfig";
+import { API_BASE_SESSAO_URL, SESSAO_API_KEY, URL_IMAGENS } from "../config/apiConfig";
 import styles from "./banner.module.css";
 
 const SESSION_USER_ENDPOINT = "UsuarioSessao";
@@ -92,7 +92,7 @@ const Banner = ({ usuarioLogado: usuarioProp }: BannerProps) => {
         const response = await fetch(`${API_BASE_SESSAO_URL}${SESSION_USER_ENDPOINT}`, {
           credentials: "include",
           headers: {
-            ApiSecurity: resolveApiKey(API_BASE_SESSAO_URL),
+            ApiSecurity: SESSAO_API_KEY,
           },
         });
 
