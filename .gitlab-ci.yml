@@ -8,10 +8,9 @@ stages:
 
 build:
   stage: build
-  image: node:20.9.0
+  image: node:20.18.0
   script:
-    - rm -rf node_modules
-    - npm install
+    - npm ci
     - npm run build
   artifacts:
     paths:
@@ -32,7 +31,7 @@ deploy:
     - docker stop makebe-vitrine || true
     - docker rm makebe-vitrine || true
     - >
-      docker run -d --name makebe-vitrine -p 8082:80
+      docker run -d --name makebe-vitrine -p 8081:80
       -v /etc/localtime:/etc/localtime:ro
       makebe-vitrine:latest
     - docker network connect dockercompose_makebe-rede makebe-vitrine || true
@@ -53,21 +52,27 @@ deploy-prod:
   image: alpine:latest
   needs: ["build"]
   before_script:
-    - apk add --no-cache openssh-client
-    - mkdir -p ~/.ssh
-    - echo "$AWS_DEPLOY_KEY" | base64 -d > ~/.ssh/id_ed25519
-    - chmod 600 ~/.ssh/id_ed25519
-    - ssh-keyscan -H "$AWS_HOST" >> ~/.ssh/known_hosts
-    - export AWS_PATH_CLEAN="$(printf '%s' "$AWS_PATH")"
+   - apk add --no-cache openssh-client
+   - mkdir -p ~/.ssh
+   - echo "$AWS_DEPLOY_KEY" | base64 -d > ~/.ssh/id_ed25519
+   - chmod 600 ~/.ssh/id_ed25519
+   - export AWS_HOST_CLEAN="$(printf '%s' "$AWS_HOST" | tr -d '[:space:]')"
+   - export AWS_USER_CLEAN="$(printf '%s' "$AWS_USER" | tr -d '[:space:]')"
+   - export AWS_PATH_CLEAN="$(printf '%s' "$AWS_PATH" | tr -d '\r\n')"
+   - echo "HOST=[$AWS_HOST_CLEAN]"
+   - echo "USER=[$AWS_USER_CLEAN]"
+   - echo "TARGET=[$AWS_USER@$AWS_HOST]"
+   - ssh -vvv -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "echo CONECTOU"
+   - ssh-keyscan -H "$AWS_HOST_CLEAN" >> ~/.ssh/known_hosts
   script:
     - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "mkdir -p \"$AWS_PATH_CLEAN\""
-    - scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -r dist "$AWS_USER@$AWS_HOST:$AWS_PATH_CLEAN/"
+    - scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -r dist "$AWS_USER@$AWS_HOST_CLEAN:$AWS_PATH_CLEAN/"
     - scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no Dockerfile.dist "$AWS_USER@$AWS_HOST:$AWS_PATH_CLEAN/"
-    - scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no nginx.conf "$AWS_USER@$AWS_HOST:$AWS_PATH_CLEAN/"
-    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "cd \"$AWS_PATH_CLEAN\" && docker build -f Dockerfile.dist -t makebe-vitrine:latest ."
-    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "docker stop makebe-vitrine 2>/dev/null || true"
-    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "docker rm makebe-vitrine 2>/dev/null || true"
-    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "docker run -d --name makebe-vitrine --network makebe_makebe-rede -p 8082:80 -v /etc/localtime:/etc/localtime:ro makebe-vitrine:latest"
+    - scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no nginx.conf "$AWS_USER@$AWS_HOST_CLEAN:$AWS_PATH_CLEAN/"
+    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST_CLEAN" "cd \"$AWS_PATH_CLEAN\" && docker build -f Dockerfile.dist -t makebe-vitrine:latest ."
+    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST_CLEAN" "docker stop makebe-vitrine 2>/dev/null || true"
+    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST_CLEAN" "docker rm makebe-vitrine 2>/dev/null || true"
+    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST_CLEAN" "docker run -d --name makebe-vitrine -p 8081:80 -v /etc/localtime:/etc/localtime:ro makebe-vitrine:latest"
   tags:
     - docker
   only:
