@@ -73,7 +73,7 @@ deploy-prod:
     - ssh -i "$HOME/.ssh/id_ed25519" -o StrictHostKeyChecking=no "$AWS_USER_CLEAN@$AWS_HOST_CLEAN" "cd \"$AWS_PATH_CLEAN\" && docker build -f Dockerfile.dist -t  makebe-vitrine:latest ."
     - ssh -i "$HOME/.ssh/id_ed25519" -o StrictHostKeyChecking=no "$AWS_USER_CLEAN@$AWS_HOST_CLEAN" "docker stop makebe-vitrine 2>/dev/null || true"
     - ssh -i "$HOME/.ssh/id_ed25519" -o StrictHostKeyChecking=no "$AWS_USER_CLEAN@$AWS_HOST_CLEAN" "docker rm makebe-vitrine 2>/dev/null || true" 
-    - ssh -i "$HOME/.ssh/id_ed25519" -o StrictHostKeyChecking=no "$AWS_USER_CLEAN@$AWS_HOST_CLEAN" "docker run -d --name makebe-vitrine -p 8081:80 -v /etc/localtime:/etc/localtime:ro makebe-vitrine:latest"
+    - ssh -i "$HOME/.ssh/id_ed25519" -o StrictHostKeyChecking=no "$AWS_USER_CLEAN@$AWS_HOST_CLEAN" "docker run -d --name makebe-vitrine -p 8082:80 -v /etc/localtime:/etc/localtime:ro makebe-vitrine:latest"
   tags:
     - docker
   only:
