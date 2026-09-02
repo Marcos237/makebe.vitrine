@@ -53,17 +53,15 @@ deploy-prod:
   image: alpine:latest
   needs: ["build"]
   before_script:
-   - apk add --no-cache openssh-client
-   - mkdir -p ~/.ssh
-   - echo "$AWS_DEPLOY_KEY" | base64 -d > ~/.ssh/id_ed25519
-   - chmod 600 ~/.ssh/id_ed25519
-   - echo "AWS_HOST=[$AWS_HOST]"
-   - echo "AWS_USER=[$AWS_USER]"
-   - echo "SSH_TARGET=[$AWS_USER@$AWS_HOST]"
-   - ssh-keyscan -H "$AWS_HOST" >> ~/.ssh/known_hosts
-   - export AWS_PATH_CLEAN="$(printf '%s' "$AWS_PATH")"
+    - export AWS_HOST_CLEAN="$(printf '%s' "$AWS_HOST" | tr -d '\r\n')"
+    - export AWS_USER_CLEAN="$(printf '%s' "$AWS_USER" | tr -d '\r\n')"
+    - export AWS_PATH_CLEAN="$(printf '%s' "$AWS_PATH" | tr -d '\r\n')"
+    - echo "HOST=[$AWS_HOST_CLEAN]"
+    - echo "USER=[$AWS_USER_CLEAN]"
+    - echo "PATH=[$AWS_PATH_CLEAN]"
+    - ssh-keyscan -H "$AWS_HOST_CLEAN" >> ~/.ssh/known_hosts
   script:
-    - ssh -vvv -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "echo CONECTOU"
+    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER_CLEAN@$AWS_HOST_CLEAN" "mkdir -p \"$AWS_PATH_CLEAN\""
     - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "mkdir -p \"$AWS_PATH_CLEAN\""
     - scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no -r dist "$AWS_USER@$AWS_HOST_CLEAN:$AWS_PATH_CLEAN/"
     - scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no Dockerfile.dist "$AWS_USER@$AWS_HOST:$AWS_PATH_CLEAN/"
