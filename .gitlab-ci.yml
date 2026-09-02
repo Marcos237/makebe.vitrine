@@ -8,15 +8,11 @@ stages:
 
 build:
   stage: build
-  image: node:20.18.0
+  image: node:20.9.0
   script:
-   - node --version
-   - npm --version
-   - pwd
-   - ls -la
-   - test -f package.json && echo "package.json OK" || echo "SEM package.json"
-   - test -f package-lock.json && echo "package-lock.json OK" || echo "SEM package-lock.json"
-   - npm ci --verbose
+    - rm -rf node_modules
+    - npm install
+    - npm run build
   artifacts:
     paths:
       - dist/
@@ -36,7 +32,7 @@ deploy:
     - docker stop makebe-vitrine || true
     - docker rm makebe-vitrine || true
     - >
-      docker run -d --name makebe-vitrine -p 8081:80
+      docker run -d --name makebe-vitrine -p 8082:80
       -v /etc/localtime:/etc/localtime:ro
       makebe-vitrine:latest
     - docker network connect dockercompose_makebe-rede makebe-vitrine || true
@@ -71,7 +67,7 @@ deploy-prod:
     - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "cd \"$AWS_PATH_CLEAN\" && docker build -f Dockerfile.dist -t makebe-vitrine:latest ."
     - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "docker stop makebe-vitrine 2>/dev/null || true"
     - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "docker rm makebe-vitrine 2>/dev/null || true"
-    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "docker run -d --name makebe-vitrine -p 8081:80 -v /etc/localtime:/etc/localtime:ro makebe-vitrine:latest"
+    - ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no "$AWS_USER@$AWS_HOST" "docker run -d --name makebe-vitrine --network makebe_makebe-rede -p 8082:80 -v /etc/localtime:/etc/localtime:ro makebe-vitrine:latest"
   tags:
     - docker
   only:
