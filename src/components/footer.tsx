@@ -8,10 +8,6 @@ const Footer = () => {
           <p className={styles.brand}>Makebe App</p>
 
           <p className={styles.copy}>
-            Experiências premium em corte, coloração e cuidado personalizado.
-          </p>
-
-          <p className={styles.copy}>
             Razão Social: 68.604.381 MARCOS DE LIMA
           </p>
 
