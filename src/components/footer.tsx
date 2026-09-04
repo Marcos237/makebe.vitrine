@@ -20,7 +20,7 @@ const Footer = () => {
           </p>
 
           <p className={styles.copy}>
-            Telefone: (11) 9414-0788
+            Telefone: (11) 94140-7887
           </p>
         </div>
 
