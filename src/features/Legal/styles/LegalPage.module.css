@@ -1,0 +1,17 @@
+.page { min-height: 100vh; background: radial-gradient(circle at top, rgba(48, 110, 255, 0.18), transparent 24%), linear-gradient(180deg, #020611 0%, #07111f 38%, #030814 100%); }
+.content { max-width: 960px; margin: 0 auto; padding: 32px 24px 56px; }
+.document { padding: 40px; border: 1px solid rgba(121, 168, 255, 0.16); border-radius: 24px; background: rgba(6, 14, 28, 0.82); backdrop-filter: blur(16px); }
+.header { padding-bottom: 28px; border-bottom: 1px solid rgba(121, 168, 255, 0.16); }
+.eyebrow { margin: 0 0 10px; color: #8fc4ff; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.title { margin: 0; color: #ffffff; font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.1; }
+.updatedAt { margin: 16px 0 0; color: rgba(219, 229, 245, 0.8); }
+.body { display: grid; gap: 28px; padding-top: 32px; }
+.body section { display: grid; gap: 14px; }
+.body h2 { margin: 0; color: #f8fbff; font-size: 1.25rem; line-height: 1.35; }
+.body p, .body li { color: rgba(219, 229, 245, 0.8); line-height: 1.75; }
+.body p { margin: 0; }
+.body ul { display: grid; gap: 8px; margin: 0; padding-left: 24px; }
+.body strong { color: #f8fbff; }
+.backLink { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; margin-top: 36px; padding: 0 22px; border: 1px solid rgba(143, 196, 255, 0.28); border-radius: 999px; background: rgba(7, 17, 36, 0.72); color: #d8e7ff; font-weight: 600; }
+.backLink:hover { border-color: rgba(143, 196, 255, 0.56); color: #ffffff; }
+@media (max-width: 640px) { .content { padding: 20px 16px 48px; } .document { padding: 24px 20px; border-radius: 20px; } .header { padding-bottom: 24px; } .body { gap: 24px; padding-top: 24px; } .backLink { width: 100%; margin-top: 28px; } }

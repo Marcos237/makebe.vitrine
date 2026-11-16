@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HomePage } from "../features/Home";
+import { PrivacyPolicyPage, TermsOfUsePage } from "../features/Legal";
 import { MeusAgendamentosPage } from "../features/MeusAgendamentos";
 import { PesquisaAgendamentoPage } from "../features/PesquisaAgendamento";
 import { VitrinePage } from "../features/Vitrine";
@@ -26,6 +27,8 @@ export function AppRoutes() {
         element={<AgendamentoColaboradorPage />}
       />
       <Route path="/meus-agendamentos" element={<MeusAgendamentosPage />} />
+      <Route path="/politica-de-privacidade" element={<PrivacyPolicyPage />} />
+      <Route path="/termos-de-uso" element={<TermsOfUsePage />} />
     </Routes>
   );
 }
